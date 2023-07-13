@@ -105,7 +105,7 @@ def name_process(name: str):
         split = [split_space[0]]
         for i in range(1, len(split_space)):
             # 如果当前字符串的语言与上一个字符串的语言相同
-            if language_pattern[i] == language_pattern[i - 1]:
+            if len(language_pattern) < i and language_pattern[i] == language_pattern[i - 1]:
                 # 合并这两个字符串
                 split[-1] += ' ' + split_space[i]
             else:

@@ -10,7 +10,7 @@ logger = logging.getLogger(__name__)
 PLATFORM = "Unix"
 
 RULES = [
-    r"(.*) - (\d{1,4}(?!\d|p)|\d{1,4}\.\d{1,2}(?!\d|p))(?:v\d{1,2})?(?: )?(?:END)?(.*)",
+    r"(.*) - ((?:OVA)?\d{1,4}(?!\d|p)|\d{1,4}\.\d{1,2}(?!\d|p))(?:v\d{1,2})?(?: )?(?:END)?(.*)",
     r"(.*)[\[\ E](\d{1,4}|\d{1,4}\.\d{1,2})(?:v\d{1,2})?(?: )?(?:END)?[\]\ ](.*)",
     r"(.*)\[(?:第)?(\d*\.*\d*)[话集話](?:END)?\](.*)",
     r"(.*)第?(\d*\.*\d*)[话話集](?:END)?(.*)",
@@ -76,7 +76,12 @@ def torrent_parser(
                 title, season = get_season_and_title(title)
             else:
                 title, _ = get_season_and_title(title)
-            episode = int(match_obj.group(2))
+
+            if re.match(r"OVA\d{1,4}", match_obj.group(2)):
+                episode = int(match_obj.group(2)[3:])
+                title += " OVA"
+            else:
+                episode = int(match_obj.group(2))
             suffix = unix_path.splitext(torrent_path)[-1]
             if file_type == "media":
                 return EpisodeFile(

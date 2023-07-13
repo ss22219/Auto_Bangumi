@@ -2,6 +2,9 @@ from module.parser.analyser import raw_parser
 
 
 def test_raw_parser():
+    content = "[Lilith-Raws] 莱莎的炼金工房 ～常暗女王与秘密藏身处～ - 02 [Baha][WebDL 1080p AVC AAC][CHT]"
+    info = raw_parser(content)
+    
     content = "【幻樱字幕组】【4月新番】【古见同学有交流障碍症 第二季 Komi-san wa, Komyushou Desu. S02】【22】【GB_MP4】【1920X1080】"
     info = raw_parser(content)
     assert info.title_en == "Komi-san wa, Komyushou Desu."

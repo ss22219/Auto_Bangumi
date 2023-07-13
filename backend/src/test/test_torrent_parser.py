@@ -2,6 +2,9 @@ from module.parser.analyser import torrent_parser
 
 
 def test_torrent_parser():
+    file_name = "[Lilith-Raws] Inu ni Nattara Suki na Hito ni Hirowareta. - OVA02 [Baha][WEB-DL][1080p][AVC AAC][CHT][MP4].mp4"
+    bf = torrent_parser(file_name)
+
     file_name = "[Lilith-Raws] Boku no Kokoro no Yabai Yatsu - 01 [Baha][WEB-DL][1080p][AVC AAC][CHT][MP4].mp4"
     bf = torrent_parser(file_name)
     assert bf.title == "Boku no Kokoro no Yabai Yatsu"
