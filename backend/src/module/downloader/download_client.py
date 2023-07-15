@@ -1,4 +1,5 @@
 import logging
+import re
 
 from .path import TorrentPath
 
@@ -68,7 +69,7 @@ class DownloadClient(TorrentPath):
             settings.downloader.path = self._join_path(prefs["save_path"], "Bangumi")
 
     def set_rule(self, data: BangumiData):
-        data.rule_name = self._rule_name(data)
+        data.rule_name = re.escape(self._rule_name(data))
         data.save_path = self._gen_save_path(data)
         rule = {
             "enable": True,
